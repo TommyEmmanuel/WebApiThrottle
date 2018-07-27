@@ -12,6 +12,9 @@ namespace WebApiThrottle
         Minute,
         Hour,
         Day,
-        Week
+        Week,
+        FiveSecond,
+        TenSecond,
+        FifteenSecond
     }
 }

@@ -11,6 +11,10 @@ namespace WebApiThrottle
     {
         public long PerSecond { get; set; }
 
+        public long PerFiveSecond { get; set; }
+        public long PerTenSecond { get; set; }
+        public long PerFifteenSecond { get; set; }
+
         public long PerMinute { get; set; }
 
         public long PerHour { get; set; }
@@ -33,6 +37,12 @@ namespace WebApiThrottle
                     return PerDay;
                 case RateLimitPeriod.Week:
                     return PerWeek;
+                case RateLimitPeriod.FiveSecond:
+                    return PerFiveSecond;
+                case RateLimitPeriod.TenSecond:
+                    return PerTenSecond;
+                case RateLimitPeriod.FifteenSecond:
+                    return PerFifteenSecond;
                 default:
                     return PerSecond;
             }

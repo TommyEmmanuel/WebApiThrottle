@@ -149,7 +149,7 @@ namespace WebApiThrottle
             {
                 hashBytes = algorithm.ComputeHash(idBytes);
             }
-            
+
             var hex = BitConverter.ToString(hashBytes).Replace("-", string.Empty);
             return hex;
         }
@@ -180,7 +180,18 @@ namespace WebApiThrottle
             {
                 defRates.Insert(4, new KeyValuePair<RateLimitPeriod, long>(RateLimitPeriod.Week, 0));
             }
-
+            if (!defRates.Any(x => x.Key == RateLimitPeriod.FiveSecond))
+            {
+                defRates.Insert(5, new KeyValuePair<RateLimitPeriod, long>(RateLimitPeriod.FiveSecond, 0));
+            }
+            if (!defRates.Any(x => x.Key == RateLimitPeriod.TenSecond))
+            {
+                defRates.Insert(6, new KeyValuePair<RateLimitPeriod, long>(RateLimitPeriod.TenSecond, 0));
+            }
+            if (!defRates.Any(x => x.Key == RateLimitPeriod.FifteenSecond))
+            {
+                defRates.Insert(7, new KeyValuePair<RateLimitPeriod, long>(RateLimitPeriod.FifteenSecond, 0));
+            }
             return defRates;
         }
 
@@ -240,6 +251,15 @@ namespace WebApiThrottle
                     break;
                 case RateLimitPeriod.Week:
                     timeSpan = TimeSpan.FromDays(7);
+                    break;
+                case RateLimitPeriod.FiveSecond:
+                    timeSpan = TimeSpan.FromSeconds(5);
+                    break;
+                case RateLimitPeriod.TenSecond:
+                    timeSpan = TimeSpan.FromSeconds(10);
+                    break;
+                case RateLimitPeriod.FifteenSecond:
+                    timeSpan = TimeSpan.FromSeconds(15);
                     break;
             }
 
